@@ -28,7 +28,7 @@ export const COLUMN_DATA = [
     dataIndex: "category",
     title: t("common.category", SINGULAR),
     key: "category",
-    width: "25%",
+    width: "20%",
   },
   {
     dataIndex: "views",
@@ -36,5 +36,11 @@ export const COLUMN_DATA = [
     key: "visits",
     width: "15%",
     sorter: true,
+  },
+  {
+    dataIndex: "likes_count",
+    title: t("common.likes"),
+    key: "likes",
+    width: "15%",
   },
 ];

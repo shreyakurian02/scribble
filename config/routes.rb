@@ -27,7 +27,9 @@ Rails.application.routes.draw do
           resource :site, only: :show
           resource :session, only: :create
           resources :categories, only: :index
-          resources :articles, only: %i[index show], param: :slug
+          resources :articles, only: %i[index show], param: :slug do
+            resource :like, only: %i[create destroy]
+          end
         end
       end
     end

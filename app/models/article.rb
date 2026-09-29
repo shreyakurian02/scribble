@@ -15,6 +15,7 @@ class Article < ApplicationRecord
   belongs_to :user
 
   has_many :article_schedules, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one :publish_schedule, -> { publish }, class_name: "ArticleSchedule", dependent: :destroy
   has_one :unpublish_schedule, -> { unpublish }, class_name: "ArticleSchedule", dependent: :destroy
 
@@ -30,6 +31,10 @@ class Article < ApplicationRecord
 
   def matched_description_content(search_term)
     description.gsub(/<[^>]+>/, "").scan(/(?i)(#{search_term}(?:[^ ]* ){0,3})/).flatten
+  end
+
+  def liked_by?(visitor_token)
+    visitor_token.present? && likes.exists?(visitor_token:)
   end
 
   private

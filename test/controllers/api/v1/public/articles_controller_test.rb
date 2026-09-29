@@ -30,7 +30,23 @@ class Api::V1::Public::ArticlesControllerTest < ActionDispatch::IntegrationTest
   def test_should_show_published_article
     get api_v1_public_article_path(@article.slug), headers: @headers
     assert_response :success
-    assert_equal %w[category_id description title], response_json["article"].keys.sort
+    assert_equal %w[category_id description liked likes_count title], response_json["article"].keys.sort
+  end
+
+  def test_show_reports_like_state_for_the_visitor
+    token = SecureRandom.uuid
+    create :like, article: @article, visitor_token: token
+    create :like, article: @article
+
+    get api_v1_public_article_path(@article.slug), headers: @headers.merge("X-Visitor-Token": token)
+    assert_equal 2, response_json["article"]["likes_count"]
+    assert response_json["article"]["liked"]
+
+    get api_v1_public_article_path(@article.slug), headers: @headers.merge("X-Visitor-Token": SecureRandom.uuid)
+    assert_not response_json["article"]["liked"]
+
+    get api_v1_public_article_path(@article.slug), headers: @headers
+    assert_not response_json["article"]["liked"]
   end
 
   def test_shouldnt_show_draft_article

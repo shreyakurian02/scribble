@@ -32,7 +32,8 @@
     "from": "From",
     "to": "To",
     "analytics": "Analytics",
-    "visits": "Visits"
+    "visits": "Visits",
+    "likes": "Likes"
   },
   "button": {
     "addEntity": "Add {{entity}}",
@@ -66,6 +67,10 @@
     "addToPath": "Add to path",
     "enterPassword": "Enter password",
     "euiSearchArticles": "Search for articles here"
+  },
+  "article": {
+    "like": "Like this article",
+    "unlike": "Unlike this article"
   },
   "noData": {
     "categories": "There are no such categories",

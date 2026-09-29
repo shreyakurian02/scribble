@@ -3,7 +3,7 @@ import { DEFAULT_ERROR_NOTIFICATION } from "constants";
 import axios from "axios";
 import { Toastr } from "neetoui";
 
-import { getFromLocalStorage } from "../utils/storage";
+import { getFromLocalStorage, getVisitorToken } from "../utils/storage";
 
 axios.defaults.baseURL = "/";
 
@@ -14,6 +14,7 @@ const setAuthHeaders = (setIsLoading = () => null) => {
     "X-CSRF-TOKEN": document
       .querySelector('[name="csrf-token"]')
       .getAttribute("content"),
+    "X-Visitor-Token": getVisitorToken(),
   };
   const token = getFromLocalStorage("authToken");
   if (token) {

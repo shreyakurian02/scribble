@@ -61,8 +61,8 @@ class Api::V1::ArticlesControllerTest < ActionDispatch::IntegrationTest
   def test_should_show_article
     get(api_v1_article_path(@article.id), headers:)
     assert_response :success
-    assert_equal %w[author category description id last_published_at slug status title updated_at versions views],
-      response_json["article"].keys.sort
+    assert_equal %w[author category description id last_published_at likes_count slug status title updated_at versions
+      views], response_json["article"].keys.sort
   end
 
   def test_shouldnt_create_article_with_invalid_params

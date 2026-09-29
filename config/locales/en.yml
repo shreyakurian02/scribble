@@ -22,6 +22,7 @@ en:
     loop: "forms a loop with existing redirection"
     same_path: "cannot be same as from path"
     chain_path: "cannot be same as %{path} path of another redirection"
+    invalid_visitor_token: "Visitor token is missing or invalid"
     alphanumeric: "should have atleast one alphanumeric character"
   article:
     invalid_status: "'%{status}' is not a valid status"
