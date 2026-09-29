@@ -9,7 +9,10 @@ module SampleData
     private
 
       def create_user!
-        site.users.create! email: "oliver@example.com", first_name: "Oliver", last_name: "Smith"
+        site.users.create!(
+          email: "oliver@example.com", first_name: "Oliver", last_name: "Smith",
+          password: "welcome", password_confirmation: "welcome"
+        )
       end
   end
 end

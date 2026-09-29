@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::SitesController < ApplicationController
+class Api::V1::SitesController < Api::V1::BaseController
   def show
     render
   end

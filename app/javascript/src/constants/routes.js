@@ -19,3 +19,7 @@ export const PUBLIC_ARTICLES_BASE_URL = `${PUBLIC_BASE_URL}/articles`;
 export const PUBLIC_SITE_BASE_URL = `${PUBLIC_BASE_URL}/site`;
 
 export const SESSIONS_BASE_URL = `${PUBLIC_BASE_URL}/session`;
+
+export const SIGNUP_API_URL = `${BASE_URL}/signup`;
+
+export const USER_SESSION_URL = `${BASE_URL}/session`;

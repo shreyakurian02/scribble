@@ -8,7 +8,7 @@ class Api::V1::Articles::ReportsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_can_generate_report
-    post(api_v1_report_path, headers:)
+    post(api_v1_report_path, headers: auth_headers(@user))
     assert_response :success
     assert @user.reload.report.attached?
   end
@@ -20,12 +20,12 @@ class Api::V1::Articles::ReportsControllerTest < ActionDispatch::IntegrationTest
       content_type: "application/pdf"
     )
     @user.report.attach(report)
-    get(download_api_v1_report_path, headers:)
+    get(download_api_v1_report_path, headers: auth_headers(@user))
     assert_response :success
   end
 
   def test_download_report_failure
-    get(download_api_v1_report_path, headers:)
+    get(download_api_v1_report_path, headers: auth_headers(@user))
     assert_response :not_found
     assert_includes response_json["error"], "Report not found"
   end

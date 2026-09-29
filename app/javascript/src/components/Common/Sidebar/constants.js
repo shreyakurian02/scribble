@@ -1,7 +1,13 @@
 import { PLURAL } from "constants";
 
 import { t } from "i18next";
-import { Notes, Settings, ExternalLink, NeetoAnalytics } from "neetoicons";
+import {
+  Notes,
+  Settings,
+  ExternalLink,
+  NeetoAnalytics,
+  Left,
+} from "neetoicons";
 
 import {
   ARTICLES_URL,
@@ -9,6 +15,7 @@ import {
   PREVIEW_URL,
   ANALYTICS_URL,
 } from "constants/urls";
+import { getFromLocalStorage } from "utils/storage";
 
 export const NAV_LINKS = [
   {
@@ -39,8 +46,16 @@ export const NAV_LINKS = [
   },
 ];
 
-export const PROFILE_INFO = {
-  name: "Oliver Smith",
-  imageUrl: "https://i.pravatar.cc/40",
-  email: "oliver@example.com",
+export const SIGN_OUT_LINK = {
+  label: t("button.signOut"),
+  to: "#",
+  isActive: () => false,
+  icon: Left,
+  description: "",
 };
+
+export const getProfileInfo = () => ({
+  name: getFromLocalStorage("authUserName"),
+  imageUrl: "https://i.pravatar.cc/40",
+  email: getFromLocalStorage("authUserEmail"),
+});

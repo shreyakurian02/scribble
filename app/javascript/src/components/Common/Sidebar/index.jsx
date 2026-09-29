@@ -2,10 +2,26 @@ import React from "react";
 
 import { Sidebar as NeetoUISidebar } from "neetoui/layouts";
 
-import { NAV_LINKS, PROFILE_INFO } from "./constants";
+import { LOGIN_URL } from "constants/urls";
+import { useLogout } from "hooks/reactQuery/useAuthApi";
+import { clearUser } from "utils/storage";
 
-const Sidebar = () => (
-  <NeetoUISidebar navLinks={NAV_LINKS} profileInfo={PROFILE_INFO} />
-);
+import { NAV_LINKS, SIGN_OUT_LINK, getProfileInfo } from "./constants";
+
+const Sidebar = () => {
+  const { mutate: logout } = useLogout({
+    onSettled: () => {
+      clearUser();
+      window.location.href = LOGIN_URL;
+    },
+  });
+
+  return (
+    <NeetoUISidebar
+      navLinks={[...NAV_LINKS, { ...SIGN_OUT_LINK, onClick: () => logout() }]}
+      profileInfo={getProfileInfo()}
+    />
+  );
+};
 
 export default Sidebar;

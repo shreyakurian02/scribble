@@ -2,35 +2,35 @@ import React, { useState, useEffect } from "react";
 
 import { PageLoader } from "neetoui";
 import { QueryClientProvider } from "react-query";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import "common/i18n";
 import { initializeLogger } from "common/logger";
+import Login from "components/Authentication/Login";
+import Signup from "components/Authentication/Signup";
 import Dashboard from "components/Dashboard";
 import EndUserInterface from "components/EndUserInterface";
-import { PREVIEW_URL, ADMIN_URL } from "constants/urls";
+import { PREVIEW_URL, ADMIN_URL, LOGIN_URL, SIGNUP_URL } from "constants/urls";
 import queryClient from "utils/queryClient";
-import { setToLocalStorage } from "utils/storage";
+import { getUserToken } from "utils/storage";
 
 import { DEFAULT_ERROR_VALUES } from "./constants";
 
-const App = ({ user }) => {
+const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [notFoundError, setNotFoundError] = useState(DEFAULT_ERROR_VALUES);
-
-  const setUserToLocalStorage = () => {
-    const { id, email } = user;
-    setToLocalStorage({ key: "authUserId", value: id });
-    setToLocalStorage({ key: "authUserEmail", value: email });
-  };
 
   useEffect(() => {
     initializeLogger();
     registerIntercepts(setNotFoundError);
     setAuthHeaders(setIsLoading);
-    setUserToLocalStorage();
   }, []);
 
   if (isLoading) {
@@ -46,15 +46,20 @@ const App = ({ user }) => {
       <Router>
         <ToastContainer />
         <Switch>
+          <Route exact component={Login} path={LOGIN_URL} />
+          <Route exact component={Signup} path={SIGNUP_URL} />
           <Route
             path={ADMIN_URL}
-            render={() => (
-              <Dashboard
-                notFoundError={notFoundError}
-                setNotFoundError={setNotFoundError}
-                user={user}
-              />
-            )}
+            render={() =>
+              getUserToken() ? (
+                <Dashboard
+                  notFoundError={notFoundError}
+                  setNotFoundError={setNotFoundError}
+                />
+              ) : (
+                <Redirect to={LOGIN_URL} />
+              )
+            }
           />
           <Route
             path={PREVIEW_URL}

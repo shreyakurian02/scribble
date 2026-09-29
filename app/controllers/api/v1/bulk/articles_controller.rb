@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Bulk::ArticlesController < ApplicationController
+class Api::V1::Bulk::ArticlesController < Api::V1::BaseController
   before_action :load_articles, only: %i[update destroy]
 
   def update

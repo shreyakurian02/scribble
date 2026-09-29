@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::Articles::ReportsController < ApplicationController
+class Api::V1::Articles::ReportsController < Api::V1::BaseController
   def create
     ReportsWorker.perform_async(current_user.id)
   end

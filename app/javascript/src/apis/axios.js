@@ -3,7 +3,15 @@ import { DEFAULT_ERROR_NOTIFICATION } from "constants";
 import axios from "axios";
 import { Toastr } from "neetoui";
 
-import { getFromLocalStorage, getVisitorToken } from "../utils/storage";
+import { PUBLIC_BASE_URL } from "constants/routes";
+import { LOGIN_URL, SIGNUP_URL } from "constants/urls";
+
+import {
+  clearUser,
+  getFromLocalStorage,
+  getUserToken,
+  getVisitorToken,
+} from "../utils/storage";
 
 axios.defaults.baseURL = "/";
 
@@ -19,6 +27,10 @@ const setAuthHeaders = (setIsLoading = () => null) => {
   const token = getFromLocalStorage("authToken");
   if (token) {
     axios.defaults.headers["X-Auth-Token"] = token;
+  }
+  const userToken = getUserToken();
+  if (userToken) {
+    axios.defaults.headers["X-User-Token"] = userToken;
   }
   setIsLoading(false);
 };
@@ -48,7 +60,14 @@ const handleErrorResponse = (axiosErrorObject, setNotFoundError) => {
   }
 
   if (errorStatus === 401) {
-    localStorage.removeItem("authToken");
+    const isPublicRequest =
+      axiosErrorObject.config?.url?.startsWith(PUBLIC_BASE_URL);
+    if (isPublicRequest) {
+      localStorage.removeItem("authToken");
+    } else if (![LOGIN_URL, SIGNUP_URL].includes(window.location.pathname)) {
+      clearUser();
+      window.location.href = LOGIN_URL;
+    }
   } else if (errorStatus === 423) {
     window.location.href = "/";
   }
