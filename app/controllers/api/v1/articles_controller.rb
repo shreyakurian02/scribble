@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ArticlesController < ApplicationController
+class Api::V1::ArticlesController < Api::V1::BaseController
   before_action :set_paper_trail_whodunnit
   before_action :load_article!, only: %i[show update destroy]
 

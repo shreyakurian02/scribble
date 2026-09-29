@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::CategoriesController < ApplicationController
+class Api::V1::CategoriesController < Api::V1::BaseController
   before_action :load_category!, only: %i[update destroy]
 
   def index

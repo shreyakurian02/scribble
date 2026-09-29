@@ -1,5 +1,9 @@
 export const ADMIN_URL = "/admin";
 
+export const LOGIN_URL = `${ADMIN_URL}/login`;
+
+export const SIGNUP_URL = `${ADMIN_URL}/signup`;
+
 export const ARTICLES_URL = `${ADMIN_URL}/articles`;
 
 export const NEW_ARTICLE_URL = `${ADMIN_URL}/articles/create`;

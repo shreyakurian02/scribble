@@ -7,6 +7,7 @@ en:
   session:
     could_not_auth: "Could not authenticate with the provided credentials."
     incorrect_credentials: "Incorrect credentials, try again."
+    signed_out: "Signed out successfully."
   errors:
     presence: "%{entity} can't be blank"
     schedule_exists: "Schedule already exists"

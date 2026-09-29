@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         resources :categories, except: %i[new show edit]
         resources :redirections, except: %i[new show edit]
         resource :site, only: %i[show update]
+        post "signup", to: "users#create", as: :signup
+        resource :session, only: %i[create destroy]
 
         resources :articles, except: %i[edit new] do
           collection do

@@ -54,7 +54,10 @@
     "goHome": "Go home",
     "restore": "Restore",
     "download": "Download",
-    "showVersionsHistory": "Show version history"
+    "showVersionsHistory": "Show version history",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "signOut": "Sign out"
   },
   "placeholder": {
     "searchArticles": "Search article titles",
@@ -91,7 +94,11 @@
     "fromPath": "From path",
     "toPath": "To path",
     "password": "Password",
-    "selectCategory": "Select a category to move this articles into"
+    "selectCategory": "Select a category to move this articles into",
+    "email": "Email",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "passwordConfirmation": "Confirm password"
   },
   "labels": {
     "content": "Content",
@@ -113,7 +120,8 @@
     "invalidEmail": "Email address must be valid",
     "validAlphaNumeric": "Must contain at least one alphanumeric character",
     "minimumPasswordLength": "Have at least 6 characters",
-    "passwordFormat": "Include at least 1 letter and 1 number"
+    "passwordFormat": "Include at least 1 letter and 1 number",
+    "passwordMatch": "Passwords must match"
   },
   "alert": {
     "deleteEntity": "Delete {{entity}}?",
@@ -162,7 +170,9 @@
     "publishArticle": "Publish article",
     "unpublishArticle": "Unpublish article",
     "articlesReport": "Articles report",
-    "versionHistoryDescription": "Version history of setting up an account in scribble."
+    "versionHistoryDescription": "Version history of setting up an account in scribble.",
+    "signIn": "Sign in",
+    "signUp": "Sign up"
   },
   "errors": {
     "pageNotFound": "The page you're looking for can't be found.",

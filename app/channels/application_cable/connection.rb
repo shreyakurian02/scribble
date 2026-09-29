@@ -11,7 +11,8 @@ module ApplicationCable
     private
 
       def find_verified_user
-        verified_user = User.find_by(email: request.query_parameters[:email])
+        token = request.query_parameters[:token].presence
+        verified_user = token && User.find_by(authentication_token: token)
         return verified_user if verified_user
 
         reject_unauthorized_connection
